@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaQuery", "SocialMediaQuery\SocialMediaQuery.csproj", "{8F51B2E1-6045-433E-9567-27F38E8D04CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaAdapters", "SocialMediaAdapters\SocialMediaAdapters.csproj", "{A00B5F39-5D8A-4267-94C6-186F318F3158}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F51B2E1-6045-433E-9567-27F38E8D04CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F51B2E1-6045-433E-9567-27F38E8D04CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F51B2E1-6045-433E-9567-27F38E8D04CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F51B2E1-6045-433E-9567-27F38E8D04CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A00B5F39-5D8A-4267-94C6-186F318F3158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A00B5F39-5D8A-4267-94C6-186F318F3158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A00B5F39-5D8A-4267-94C6-186F318F3158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A00B5F39-5D8A-4267-94C6-186F318F3158}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
