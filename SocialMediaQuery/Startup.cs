@@ -22,16 +22,25 @@ namespace SocialMediaQuery
         /// <param name="app">The app.</param>
         public void Configuration(IAppBuilder app)
         {
-            var consumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"];
-            var consumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"];
+            var twitterConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"];
+            var twitterConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"];
+            var instagramConsumerKey = ConfigurationManager.AppSettings["InstagramClientKey"];
+            var instagramConsumerSecret = ConfigurationManager.AppSettings["InstagramClientSecret"];
 
-            if (string.IsNullOrEmpty(consumerKey) || string.IsNullOrEmpty(consumerSecret))
+            if (string.IsNullOrEmpty(twitterConsumerKey) || string.IsNullOrEmpty(twitterConsumerSecret))
             {
                 throw new NullReferenceException("Please check if TwitterConsumerKey and TwitterConsumerSecret values exist in the appSettings section of your web.config!");
             }
 
-            System.Web.HttpContext.Current.Application["TwitterConsumerKey"] = consumerKey;
-            System.Web.HttpContext.Current.Application["TwitterConsumerSecret"] = consumerSecret;
+            if (string.IsNullOrEmpty(instagramConsumerKey) || string.IsNullOrEmpty(instagramConsumerSecret))
+            {
+                throw new NullReferenceException("Please check if InstagramClientKey and InstagramClientSecret values exist in the appSettings section of your web.config!");
+            }
+
+            System.Web.HttpContext.Current.Application["TwitterConsumerKey"] = twitterConsumerKey;
+            System.Web.HttpContext.Current.Application["TwitterConsumerSecret"] = twitterConsumerSecret;
+            System.Web.HttpContext.Current.Application["InstagramClientKey"] = instagramConsumerKey;
+            System.Web.HttpContext.Current.Application["InstagramClientSecret"] = instagramConsumerSecret;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SocialMediaQuery.Controllers
         public ActionResult Index()
         {
             var model = new Index();
-            model.DataSources = new List<DataSource>() { new DataSource() { Id = 1, Name = "Twitter" } };
+            model.DataSources = new List<DataSource>() { new DataSource() { Id = 1, Name = "Twitter" }, new DataSource() { Id = 2, Name = "Instagram" } };
             return this.View(model);
         }
 
@@ -25,6 +25,10 @@ namespace SocialMediaQuery.Controllers
             if (dataSourceId == 1)
             {
                 return this.RedirectToAction("TwitterSearch", "Results", new { query = query });
+            }
+            else if (dataSourceId == 2)
+            {
+                return this.RedirectToAction("InstagramAuth", "Results", new { query = query });
             }
 
             return this.RedirectToAction("Index");
