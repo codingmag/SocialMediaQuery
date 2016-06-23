@@ -48,21 +48,38 @@ namespace SocialMediaQuery.Controllers
         [ActionName("InstagramSearch")]
         public async Task<ActionResult> InstagramSearchAsync(string query, string code)
         {
-            var oauthResponse = InstagramAdapter.GetOAuthResponse(code);
+            var model = new InstagramSearch() { Query = query, ResultsXml = string.Empty };
 
-            query = query.Replace(" ", string.Empty);
-
-            var model = new InstagramSearch() { Query = query };
-            if (oauthResponse == null || !query.Contains(',') || !query.ToLower().Contains("lat:") || !query.ToLower().Contains("lon:"))
+            if (string.IsNullOrEmpty(query))
             {
-                model.ResultsXml = string.Empty;
                 return this.View(model);
             }
 
-            var coordinates = query.Split(',');
-            var lat = Convert.ToDouble(coordinates[0].Replace("lat:", string.Empty), CultureInfo.InvariantCulture);
-            var lon = Convert.ToDouble(coordinates[1].Replace("lon:", string.Empty), CultureInfo.InvariantCulture);
-            model.ResultsXml = await InstagramAdapter.SearchAsync(lat, lon, oauthResponse);
+            query = query.Replace(" ", string.Empty);
+            
+            var oauthResponse = InstagramAdapter.GetOAuthResponse(code);
+            
+            if (oauthResponse == null || oauthResponse.User == null || oauthResponse.AccessToken == null)
+            {
+                return this.View(model);
+            }
+
+            if (query.StartsWith("lat:", StringComparison.InvariantCulture))
+            {
+                if (!query.Contains(',') || !query.ToLower().Contains("lat:") || !query.ToLower().Contains("lon:"))
+                {
+                    return this.View(model);
+                }
+
+                var coordinates = query.Split(',');
+                var lat = Convert.ToDouble(coordinates[0].Replace("lat:", string.Empty), CultureInfo.InvariantCulture);
+                var lon = Convert.ToDouble(coordinates[1].Replace("lon:", string.Empty), CultureInfo.InvariantCulture);
+                model.ResultsXml = await InstagramAdapter.SearchAsync(lat, lon, oauthResponse);
+            }
+            else
+            {
+                model.ResultsXml = await InstagramAdapter.TagsAsync(query, oauthResponse);
+            }
 
             return this.View(model);
         }

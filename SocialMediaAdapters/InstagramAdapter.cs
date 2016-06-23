@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace SocialMediaAdapters
 {
     using InstaSharp;
+    using InstaSharp.Models;
     using InstaSharp.Models.Responses;
 
     public static class InstagramAdapter
@@ -34,9 +35,22 @@ namespace SocialMediaAdapters
             var media = new InstaSharp.Endpoints.Media(InstagramConfig, oAuthResponse);
             var searchResults = await media.Search(latitude, longitude, 5000);
 
+            return SerializeResults(searchResults.Data);
+        }
+
+        public static async Task<string> TagsAsync(string query, OAuthResponse oAuthResponse)
+        {
+            var tags = new InstaSharp.Endpoints.Tags(InstagramConfig, oAuthResponse);
+            var searchResults = await tags.Recent(query);
+
+            return SerializeResults(searchResults.Data);
+        }
+
+        private static string SerializeResults(List<Media> mediaList)
+        {
             var serializedResults = new StringBuilder();
 
-            foreach (var resultItem in searchResults.Data)
+            foreach (var resultItem in mediaList)
             {
                 serializedResults.AppendFormat(
                         "<blockquote class=\"twitter-tweet\"><p>{0}</p><p><a href=\"{1}\"><img src=\"{2}\"/>{3}</a> - {4}</p></blockquote>",
