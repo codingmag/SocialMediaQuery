@@ -83,5 +83,39 @@ namespace SocialMediaQuery.Controllers
 
             return this.View(model);
         }
+
+        public ActionResult GooglePlusSearch(string query)
+        {
+            var apiKey = System.Web.HttpContext.Current.Application["GoogleAPIKey"].ToString();
+            GoogleAdapter.ApiKey = apiKey;
+
+            var model = new GooglePlusSearch() { Query = query, ResultsXml = string.Empty };
+
+            if (string.IsNullOrEmpty(query))
+            {
+                return this.View(model);
+            }
+
+            model.ResultsXml = GoogleAdapter.SearchGooglePlus(query);
+
+            return this.View(model);
+        }
+
+        public ActionResult YouTubeSearch(string query)
+        {
+            var apiKey = System.Web.HttpContext.Current.Application["GoogleAPIKey"].ToString();
+            GoogleAdapter.ApiKey = apiKey;
+
+            var model = new YouTubeSearch() { Query = query, ResultsXml = string.Empty };
+
+            if (string.IsNullOrEmpty(query))
+            {
+                return this.View(model);
+            }
+
+            model.ResultsXml = GoogleAdapter.SearchYouTube(query);
+
+            return this.View(model);
+        }
     }
 }

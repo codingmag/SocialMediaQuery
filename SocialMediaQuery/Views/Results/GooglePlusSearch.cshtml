@@ -1,0 +1,14 @@
+﻿@model SocialMediaQuery.Models.Results.GooglePlusSearch
+@{
+    ViewBag.Title = "Google Plus Query Results Page";
+}
+
+<div class="jumbotron">
+    <h1>Google+ results for: @Model.Query</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        @Html.Raw(Model.ResultsXml)
+    </div>
+</div>
